@@ -12,6 +12,7 @@ topology:
       image: quay.io/frrouting/frr:9.0.2
 
   nodes:
+    ### FABRIC ###
     spine:
       type: ixrd3l
       # startup-config: startup_configs/spine.conf
@@ -22,6 +23,7 @@ topology:
       type: ixrd2l
       # startup-config: startup_configs/leaf2.conf
 
+    ### CLIENTS ###
     srv1:
       kind: linux
       exec:
@@ -56,6 +58,14 @@ topology:
         - ip link set dev eth1 address 00:C1:AB:00:01:02
         - ip link set dev eth0 down
         - touch /etc/frr/vtysh.conf
+
+    ### TELEMETRY STACK ###
+    gnmic:
+      kind: linux
+      image: ghcr.io/karimra/gnmic:0.24.4
+      binds:
+        - configs/gnmic.yml:/gnmic.yml:ro
+      cmd: --config /gnmic.yml --log subscribe
 
   links:
     # Spine - Leaf
