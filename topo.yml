@@ -67,6 +67,15 @@ topology:
         - configs/gnmic.yml:/gnmic.yml:ro
       cmd: --config /gnmic.yml --log subscribe
 
+    prometheus:
+      kind: linux
+      image: prom/prometheus:v2.23.0
+      binds:
+        - configs/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+
   links:
     # Spine - Leaf
     - endpoints: ["spine:e1-1", "leaf1:e1-49"]
