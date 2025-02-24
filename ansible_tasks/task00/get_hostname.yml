@@ -1,0 +1,14 @@
+- name: Get hostname from SR Linux
+  hosts: l3evpn-leaf1, l3evpn-leaf2, l3evpn-spine
+  gather_facts: false
+  tasks:
+    - name: Get hostname
+      nokia.srlinux.get:
+        paths:
+          - path: /system/name/host-name
+          #- path: /system/information/version
+          #- path: /system/json-rpc-server/network-instance[name=mgmt]/https/tls-profile
+      register: get_result
+
+    - ansible.builtin.debug:
+        msg: "Hostname is {{get_result.result[0]}}"
