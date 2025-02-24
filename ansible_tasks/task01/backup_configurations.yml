@@ -1,0 +1,15 @@
+- name: Configuration backup
+  hosts: l3evpn-leaf1, l3evpn-leaf2, l3evpn-spine
+  gather_facts: false
+  tasks:
+    - name: fetched configurations
+      nokia.srlinux.get:
+        paths: 
+          - path: /
+            datastore: running
+      register: get_result
+
+    - name: Save fetched configs
+      ansible.builtin.copy:
+        content: "{{get_result.result[0] | to_nice_json}}"
+        dest: "{{playbook_dir}}/{{inventory_hostname}}.cfg.json"

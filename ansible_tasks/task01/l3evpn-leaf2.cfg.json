@@ -1,0 +1,2124 @@
+{
+    "srl_nokia-acl:acl": {
+        "acl-filter": [
+            {
+                "entry": [
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMP unreachable messages",
+                        "match": {
+                            "ipv4": {
+                                "icmp": {
+                                    "type": "dest-unreachable"
+                                },
+                                "protocol": "icmp"
+                            }
+                        },
+                        "sequence-id": 10
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMP time-exceeded messages",
+                        "match": {
+                            "ipv4": {
+                                "icmp": {
+                                    "type": "time-exceeded"
+                                },
+                                "protocol": "icmp"
+                            }
+                        },
+                        "sequence-id": 20
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMP echo messages",
+                        "match": {
+                            "ipv4": {
+                                "icmp": {
+                                    "type": "echo"
+                                },
+                                "protocol": "icmp"
+                            }
+                        },
+                        "sequence-id": 40
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMP echo-reply messages",
+                        "match": {
+                            "ipv4": {
+                                "icmp": {
+                                    "type": "echo-reply"
+                                },
+                                "protocol": "icmp"
+                            }
+                        },
+                        "sequence-id": 50
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SSH when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 22
+                                }
+                            }
+                        },
+                        "sequence-id": 60
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SSH when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 22
+                                }
+                            }
+                        },
+                        "sequence-id": 70
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming Telnet when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 23
+                                }
+                            }
+                        },
+                        "sequence-id": 88
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming Telnet when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 23
+                                }
+                            }
+                        },
+                        "sequence-id": 98
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming TACACS+ when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 49
+                                }
+                            }
+                        },
+                        "sequence-id": 100
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming TACACS+ when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 49
+                                }
+                            }
+                        },
+                        "sequence-id": 110
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DNS response messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 53
+                                }
+                            }
+                        },
+                        "sequence-id": 120
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DHCP messages targeted for BOOTP/DHCP client",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 68
+                                }
+                            }
+                        },
+                        "sequence-id": 130
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming HTTP(JSON-RPC) when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 80
+                                }
+                            }
+                        },
+                        "sequence-id": 158
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTP(JSON-RPC) when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 80
+                                }
+                            }
+                        },
+                        "sequence-id": 160
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming NTP messages from servers",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 123
+                                }
+                            }
+                        },
+                        "sequence-id": 170
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SNMP GET/GETNEXT messages from servers",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 161
+                                }
+                            }
+                        },
+                        "sequence-id": 180
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming BGP when the other router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 179
+                                }
+                            }
+                        },
+                        "sequence-id": 190
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming BGP when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 179
+                                }
+                            }
+                        },
+                        "sequence-id": 200
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTPS(JSON-RPC) when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 443
+                                }
+                            }
+                        },
+                        "sequence-id": 210
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTPS(JSON-RPC) when this router initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 443
+                                }
+                            }
+                        },
+                        "sequence-id": 220
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming single-hop BFD session messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 3784
+                                }
+                            }
+                        },
+                        "sequence-id": 230
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming multi-hop BFD session messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 4784
+                                }
+                            }
+                        },
+                        "sequence-id": 240
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming uBFD session messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 6784
+                                }
+                            }
+                        },
+                        "sequence-id": 250
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming gRPC messages when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 57400
+                                }
+                            }
+                        },
+                        "sequence-id": 260
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming UDP traceroute messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "range": {
+                                        "end": 33464,
+                                        "start": 33434
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 270
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming OSPF messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": 89
+                            }
+                        },
+                        "sequence-id": 290
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DHCP relay messages targeted for BOOTP/DHCP server",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 67
+                                }
+                            }
+                        },
+                        "sequence-id": 300
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept ICMP fragment packets",
+                        "match": {
+                            "ipv4": {
+                                "fragment": true,
+                                "protocol": "icmp"
+                            }
+                        },
+                        "sequence-id": 310
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 320
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets with source-port 646",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 330
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets with destination-port 646",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 340
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming gRPC over port 57401 for the insecure-mgmt gRPC server",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 57401
+                                }
+                            }
+                        },
+                        "sequence-id": 358
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming IGMP packets",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "igmp"
+                            }
+                        },
+                        "sequence-id": 370
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PIM packets",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "pim"
+                            }
+                        },
+                        "sequence-id": 380
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming RADIUS AAA packets",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "range": {
+                                        "end": 1813,
+                                        "start": 1812
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 390
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PTP messages with destination-ports 319 and 320",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "range": {
+                                        "end": 320,
+                                        "start": 319
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 410
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PCEP packets with destination-port 4189",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 4189
+                                }
+                            }
+                        },
+                        "sequence-id": 420
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SBFD session messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 7784
+                                }
+                            }
+                        },
+                        "sequence-id": 430
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SBFD session messages",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 7784
+                                }
+                            }
+                        },
+                        "sequence-id": 440
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LSP MPLS Echo requests and replies",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 3503
+                                }
+                            }
+                        },
+                        "sequence-id": 450
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LSP MPLS Echo requests and replies",
+                        "match": {
+                            "ipv4": {
+                                "protocol": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 3503
+                                }
+                            }
+                        },
+                        "sequence-id": 460
+                    },
+                    {
+                        "action": {
+                            "drop": {},
+                            "log": true
+                        },
+                        "description": "Drop all else",
+                        "sequence-id": 1000
+                    }
+                ],
+                "name": "cpm",
+                "statistics-per-entry": true,
+                "type": "ipv4"
+            },
+            {
+                "entry": [
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 unreachable messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "dest-unreachable"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 10
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 packet-too-big messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "packet-too-big"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 20
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 time-exceeded messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "time-exceeded"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 30
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 echo-request messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "echo-request"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 50
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 echo-reply messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "echo-reply"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 60
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 router-advertisement messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "router-advertise"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 70
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 neighbor-solicitation messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "neighbor-solicit"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 80
+                    },
+                    {
+                        "action": {
+                            "accept": {
+                                "rate-limit": {
+                                    "system-cpu-policer": "icmp"
+                                }
+                            }
+                        },
+                        "description": "Accept incoming ICMPv6 neighbor-advertisement messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "neighbor-advertise"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 90
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SSH when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 22
+                                }
+                            }
+                        },
+                        "sequence-id": 100
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SSH when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 22
+                                }
+                            }
+                        },
+                        "sequence-id": 110
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming Telnet when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 23
+                                }
+                            }
+                        },
+                        "sequence-id": 128
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming Telnet when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 23
+                                }
+                            }
+                        },
+                        "sequence-id": 138
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming TACACS+ when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 49
+                                }
+                            }
+                        },
+                        "sequence-id": 140
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming TACACS+ when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 49
+                                }
+                            }
+                        },
+                        "sequence-id": 150
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DNS response messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 53
+                                }
+                            }
+                        },
+                        "sequence-id": 160
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming HTTP(JSON-RPC) when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 80
+                                }
+                            }
+                        },
+                        "sequence-id": 188
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTP(JSON-RPC) when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 80
+                                }
+                            }
+                        },
+                        "sequence-id": 190
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming NTP messages from servers",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 123
+                                }
+                            }
+                        },
+                        "sequence-id": 200
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SNMP GET/GETNEXT messages from servers",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 161
+                                }
+                            }
+                        },
+                        "sequence-id": 210
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming BGP when the other router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 179
+                                }
+                            }
+                        },
+                        "sequence-id": 220
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming BGP when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 179
+                                }
+                            }
+                        },
+                        "sequence-id": 230
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTPS(JSON-RPC) when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 443
+                                }
+                            }
+                        },
+                        "sequence-id": 240
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming HTTPS(JSON-RPC) when this router initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 443
+                                }
+                            }
+                        },
+                        "sequence-id": 250
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DHCPv6 client messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 546
+                                }
+                            }
+                        },
+                        "sequence-id": 260
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming single-hop BFD session messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 3784
+                                }
+                            }
+                        },
+                        "sequence-id": 270
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming multi-hop BFD session messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 4784
+                                }
+                            }
+                        },
+                        "sequence-id": 280
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming uBFD session messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 6784
+                                }
+                            }
+                        },
+                        "sequence-id": 290
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming gRPC messages when the other host initiates the TCP connection",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 57400
+                                }
+                            }
+                        },
+                        "sequence-id": 300
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming UDP traceroute messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "range": {
+                                        "end": 33464,
+                                        "start": 33434
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 310
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming IPV6 hop-in-hop messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": 0
+                            }
+                        },
+                        "sequence-id": 320
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming OSPF messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": 89
+                            }
+                        },
+                        "sequence-id": 340
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming DHCPv6 relay messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 547
+                                }
+                            }
+                        },
+                        "sequence-id": 350
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Containerlab-added rule: Accept incoming gRPC over port 57401 for the insecure-mgmt gRPC server",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 57401
+                                }
+                            }
+                        },
+                        "sequence-id": 368
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming MLDv1 report messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "mld-report"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 380
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming MLDv2 report messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "mld-v2"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 390
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming MLDv1 done messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "mld-done"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 400
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming MLD query messages",
+                        "match": {
+                            "ipv6": {
+                                "icmp6": {
+                                    "type": "mld-query"
+                                },
+                                "next-header": "icmp6"
+                            }
+                        },
+                        "sequence-id": 410
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PIM messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "pim"
+                            }
+                        },
+                        "sequence-id": 420
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming RADIUS AAA messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "range": {
+                                        "end": 1813,
+                                        "start": 1812
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 430
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PTP messages with destination-ports 319 and 320",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "range": {
+                                        "end": 320,
+                                        "start": 319
+                                    }
+                                }
+                            }
+                        },
+                        "sequence-id": 450
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming PCEP packets with destination-port 4189",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 4189
+                                }
+                            }
+                        },
+                        "sequence-id": 460
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SBFD session messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 7784
+                                }
+                            }
+                        },
+                        "sequence-id": 470
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming SBFD session messages",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 7784
+                                }
+                            }
+                        },
+                        "sequence-id": 480
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "udp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 490
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets with source-port 646",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "source-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 500
+                    },
+                    {
+                        "action": {
+                            "accept": {}
+                        },
+                        "description": "Accept incoming LDP packets with destination-port 646",
+                        "match": {
+                            "ipv6": {
+                                "next-header": "tcp"
+                            },
+                            "transport": {
+                                "destination-port": {
+                                    "operator": "eq",
+                                    "value": 646
+                                }
+                            }
+                        },
+                        "sequence-id": 510
+                    },
+                    {
+                        "action": {
+                            "drop": {},
+                            "log": true
+                        },
+                        "description": "Drop all else",
+                        "sequence-id": 1000
+                    }
+                ],
+                "name": "cpm",
+                "statistics-per-entry": true,
+                "type": "ipv6"
+            }
+        ],
+        "policers": {
+            "system-cpu-policer": [
+                {
+                    "entry-specific": false,
+                    "max-packet-burst": 1000,
+                    "name": "icmp",
+                    "peak-packet-rate": 1000
+                }
+            ]
+        }
+    },
+    "srl_nokia-interfaces:interface": [
+        {
+            "admin-state": "enable",
+            "name": "ethernet-1/1",
+            "subinterface": [
+                {
+                    "admin-state": "enable",
+                    "index": 0,
+                    "ipv4": {
+                        "address": [
+                            {
+                                "ip-prefix": "192.168.200.254/24"
+                            }
+                        ],
+                        "admin-state": "enable"
+                    }
+                }
+            ]
+        },
+        {
+            "admin-state": "enable",
+            "name": "ethernet-1/2"
+        },
+        {
+            "admin-state": "enable",
+            "name": "ethernet-1/49",
+            "subinterface": [
+                {
+                    "admin-state": "enable",
+                    "index": 0,
+                    "ipv4": {
+                        "address": [
+                            {
+                                "ip-prefix": "1.1.23.1/31"
+                            }
+                        ],
+                        "admin-state": "enable"
+                    }
+                }
+            ]
+        },
+        {
+            "admin-state": "enable",
+            "name": "mgmt0",
+            "subinterface": [
+                {
+                    "admin-state": "enable",
+                    "index": 0,
+                    "ip-mtu": 1500,
+                    "ipv4": {
+                        "admin-state": "enable",
+                        "srl_nokia-interfaces-ip-dhcp:dhcp-client": {}
+                    },
+                    "ipv6": {
+                        "admin-state": "enable",
+                        "srl_nokia-interfaces-ip-dhcp:dhcp-client": {}
+                    }
+                }
+            ]
+        },
+        {
+            "admin-state": "enable",
+            "name": "system0",
+            "subinterface": [
+                {
+                    "admin-state": "enable",
+                    "index": 0,
+                    "ipv4": {
+                        "address": [
+                            {
+                                "ip-prefix": "22.22.22.22/32"
+                            }
+                        ],
+                        "admin-state": "enable"
+                    }
+                }
+            ]
+        }
+    ],
+    "srl_nokia-network-instance:network-instance": [
+        {
+            "admin-state": "enable",
+            "interface": [
+                {
+                    "name": "ethernet-1/49.0"
+                },
+                {
+                    "name": "system0.0"
+                }
+            ],
+            "name": "default",
+            "protocols": {
+                "srl_nokia-bgp:bgp": {
+                    "afi-safi": [
+                        {
+                            "admin-state": "enable",
+                            "afi-safi-name": "srl_nokia-common:ipv4-unicast"
+                        }
+                    ],
+                    "autonomous-system": 200,
+                    "group": [
+                        {
+                            "admin-state": "enable",
+                            "export-policy": "allow-all",
+                            "group-name": "ebgp-underlay",
+                            "import-policy": "allow-all",
+                            "peer-as": 300
+                        },
+                        {
+                            "afi-safi": [
+                                {
+                                    "admin-state": "enable",
+                                    "afi-safi-name": "srl_nokia-common:evpn"
+                                },
+                                {
+                                    "admin-state": "disable",
+                                    "afi-safi-name": "srl_nokia-common:ipv4-unicast"
+                                }
+                            ],
+                            "group-name": "ibgp-underlay",
+                            "local-as": {
+                                "as-number": 64999
+                            },
+                            "peer-as": 64999
+                        }
+                    ],
+                    "neighbor": [
+                        {
+                            "peer-address": "1.1.23.0",
+                            "peer-group": "ebgp-underlay"
+                        },
+                        {
+                            "peer-address": "33.33.33.33",
+                            "peer-group": "ibgp-underlay"
+                        }
+                    ],
+                    "router-id": "22.22.22.22"
+                }
+            }
+        },
+        {
+            "admin-state": "enable",
+            "description": "Management network instance",
+            "interface": [
+                {
+                    "name": "mgmt0.0"
+                }
+            ],
+            "name": "mgmt",
+            "protocols": {
+                "srl_nokia-linux:linux": {
+                    "export-neighbors": true,
+                    "export-routes": true,
+                    "import-routes": true
+                }
+            },
+            "type": "srl_nokia-network-instance:ip-vrf"
+        },
+        {
+            "admin-state": "enable",
+            "interface": [
+                {
+                    "name": "ethernet-1/1.0"
+                }
+            ],
+            "name": "tenant-1",
+            "protocols": {
+                "bgp-evpn": {
+                    "srl_nokia-bgp-evpn:bgp-instance": [
+                        {
+                            "admin-state": "enable",
+                            "ecmp": 8,
+                            "evi": 1,
+                            "id": 1,
+                            "vxlan-interface": "vxlan1.100200"
+                        }
+                    ]
+                },
+                "srl_nokia-bgp-vpn:bgp-vpn": {
+                    "bgp-instance": [
+                        {
+                            "id": 1,
+                            "route-target": {
+                                "export-rt": "target:64999:100200",
+                                "import-rt": "target:64999:100200"
+                            }
+                        }
+                    ]
+                }
+            },
+            "type": "srl_nokia-network-instance:ip-vrf",
+            "vxlan-interface": [
+                {
+                    "name": "vxlan1.100200"
+                }
+            ]
+        }
+    ],
+    "srl_nokia-routing-policy:routing-policy": {
+        "policy": [
+            {
+                "default-action": {
+                    "policy-result": "accept"
+                },
+                "name": "allow-all"
+            }
+        ]
+    },
+    "srl_nokia-system:system": {
+        "control-plane-traffic": {
+            "input": {
+                "srl_nokia-acl:acl": {
+                    "acl-filter": [
+                        {
+                            "name": "cpm",
+                            "type": "ipv4"
+                        },
+                        {
+                            "name": "cpm",
+                            "type": "ipv6"
+                        }
+                    ]
+                }
+            }
+        },
+        "srl_nokia-aaa:aaa": {
+            "authentication": {
+                "admin-user": {
+                    "ssh-key": [
+                        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDzeVjTfl4vqoSY3OAQdroO8EAvpALdtbSQ0yt6qFcEPFskxGfJLIIH+PbOGMNh2J7JJepoG3AOQbeWjS90PNrrBh2Nd++YsIsOHFSnx9Wx6l05n6xpLQGTP2Qk9wt4ELLnKnXXlov/0EXFBJWi8N7nRFbomgeEMC3j180Z8Ldy0C2gCu+AvMbfDrYvoMb+/0qVBWbXMxi9AwcWDnzRFd9ZB4GO05aZP2r2xVR9bvKcKacpvX5aYPYrgUTz1O3c6IBhJDOFdsexmcFCmtneTWc+Rnn9oW4iz1b/TJ5WlgoLigoOoOJalfVQLr/UJEf0TB9f25yPGE5piZrSo0XtbTyP9RkR/cJTGtmZkRXLy/5CnPpAztZk8r/TcYtIcooBfOUBycBH4iYdJwDXuuTIBrkKQUHeW7ZCQFqGBiOCVtE5CXosNpN7YTvBzhaqdhLl69IjVTHPX49q0qYrW/0w40bfv1riwdTY11j0W0YKZrrcEIuBbIeAIpglSBd8V7e7gwY9Q5vK2MNxVyeLC59ki4NC5+ao5D7GDWyICLTWzVit6Vq6d8mWhlTHJ6UL6b8MDneaJ5gcOzL1a31tLGSpKWxHYmicBVPEtntS8TXgcRq2XQw8IGW4o/Ay8SJO16UwyIiwa418pwQ6R4Z+hfvAmF379bDiRRg/xUndaJ+oaA5oPQ==",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOeystiFZc3nNI+Pzrw0p/fzsYh6DAdEYk90//OPEKZ",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHvjDAXoTPfyUUTdaSymVEqMWeU+puh9fPLsyBfmdgSN",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTTAFr/BzlUFmPgyWSYZ7C32IwgycM1gdN6cSVGgzR2",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORdydX8ZnILZCucH3mevzFXkEvbznQ26JGXUVvN57Bz",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbgxX4Nu6r/puVoPGmD9dXV5FXiykydeOPLbkl4MV9a",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKW6WyRyKleg6KeivHocPUaQ/Y+Avn+N109u1KDn4TSW",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmaEe0Dm+EqI1+epvGoPe9Wk2LcsKoeJAy9Xv1RqsMK"
+                    ]
+                },
+                "authentication-method": [
+                    "local"
+                ],
+                "idle-timeout": 7200,
+                "linuxadmin-user": {
+                    "password": "$y$j9T$DbT6fPrCRIFoKCGhsL3pB0$Rb53YfyCdnjkUtguz8KWuI4ADfYM8WKI9XavXvzvS/C",
+                    "ssh-key": [
+                        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDzeVjTfl4vqoSY3OAQdroO8EAvpALdtbSQ0yt6qFcEPFskxGfJLIIH+PbOGMNh2J7JJepoG3AOQbeWjS90PNrrBh2Nd++YsIsOHFSnx9Wx6l05n6xpLQGTP2Qk9wt4ELLnKnXXlov/0EXFBJWi8N7nRFbomgeEMC3j180Z8Ldy0C2gCu+AvMbfDrYvoMb+/0qVBWbXMxi9AwcWDnzRFd9ZB4GO05aZP2r2xVR9bvKcKacpvX5aYPYrgUTz1O3c6IBhJDOFdsexmcFCmtneTWc+Rnn9oW4iz1b/TJ5WlgoLigoOoOJalfVQLr/UJEf0TB9f25yPGE5piZrSo0XtbTyP9RkR/cJTGtmZkRXLy/5CnPpAztZk8r/TcYtIcooBfOUBycBH4iYdJwDXuuTIBrkKQUHeW7ZCQFqGBiOCVtE5CXosNpN7YTvBzhaqdhLl69IjVTHPX49q0qYrW/0w40bfv1riwdTY11j0W0YKZrrcEIuBbIeAIpglSBd8V7e7gwY9Q5vK2MNxVyeLC59ki4NC5+ao5D7GDWyICLTWzVit6Vq6d8mWhlTHJ6UL6b8MDneaJ5gcOzL1a31tLGSpKWxHYmicBVPEtntS8TXgcRq2XQw8IGW4o/Ay8SJO16UwyIiwa418pwQ6R4Z+hfvAmF379bDiRRg/xUndaJ+oaA5oPQ==",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOeystiFZc3nNI+Pzrw0p/fzsYh6DAdEYk90//OPEKZ",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHvjDAXoTPfyUUTdaSymVEqMWeU+puh9fPLsyBfmdgSN",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTTAFr/BzlUFmPgyWSYZ7C32IwgycM1gdN6cSVGgzR2",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORdydX8ZnILZCucH3mevzFXkEvbznQ26JGXUVvN57Bz",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbgxX4Nu6r/puVoPGmD9dXV5FXiykydeOPLbkl4MV9a",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKW6WyRyKleg6KeivHocPUaQ/Y+Avn+N109u1KDn4TSW",
+                        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmaEe0Dm+EqI1+epvGoPe9Wk2LcsKoeJAy9Xv1RqsMK"
+                    ]
+                }
+            },
+            "server-group": [
+                {
+                    "name": "local",
+                    "type": "srl_nokia-aaa-types:local"
+                }
+            ]
+        },
+        "srl_nokia-dns:dns": {
+            "network-instance": "mgmt",
+            "server-list": [
+                "168.95.192.1",
+                "172.22.0.30",
+                "172.22.255.30"
+            ]
+        },
+        "srl_nokia-grpc:grpc-server": [
+            {
+                "admin-state": "enable",
+                "name": "insecure-mgmt",
+                "network-instance": "mgmt",
+                "port": 57401,
+                "rate-limit": 65000,
+                "services": [
+                    "srl_nokia-grpc:gnmi",
+                    "srl_nokia-grpc:gnoi",
+                    "srl_nokia-grpc:gnsi",
+                    "srl_nokia-grpc:gribi",
+                    "srl_nokia-grpc:p4rt"
+                ],
+                "trace-options": [
+                    "request",
+                    "response",
+                    "common"
+                ],
+                "unix-socket": {
+                    "admin-state": "enable"
+                }
+            },
+            {
+                "admin-state": "enable",
+                "name": "mgmt",
+                "network-instance": "mgmt",
+                "rate-limit": 65000,
+                "services": [
+                    "srl_nokia-grpc:gnmi",
+                    "srl_nokia-grpc:gnoi",
+                    "srl_nokia-grpc:gnsi",
+                    "srl_nokia-grpc:gribi",
+                    "srl_nokia-grpc:p4rt"
+                ],
+                "tls-profile": "clab-profile",
+                "trace-options": [
+                    "request",
+                    "response",
+                    "common"
+                ],
+                "unix-socket": {
+                    "admin-state": "enable"
+                }
+            }
+        ],
+        "srl_nokia-json-rpc:json-rpc-server": {
+            "admin-state": "enable",
+            "network-instance": [
+                {
+                    "http": {
+                        "admin-state": "enable"
+                    },
+                    "https": {
+                        "admin-state": "enable",
+                        "tls-profile": "clab-profile"
+                    },
+                    "name": "mgmt"
+                }
+            ]
+        },
+        "srl_nokia-lldp:lldp": {
+            "admin-state": "enable"
+        },
+        "srl_nokia-logging:logging": {
+            "buffer": [
+                {
+                    "buffer-name": "messages",
+                    "facility": [
+                        {
+                            "facility-name": "local6",
+                            "priority": {
+                                "match-above": "informational"
+                            }
+                        }
+                    ],
+                    "rotate": 3,
+                    "size": "10000000"
+                },
+                {
+                    "buffer-name": "system",
+                    "facility": [
+                        {
+                            "facility-name": "auth",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "cron",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "daemon",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "ftp",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "kern",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "lpr",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "mail",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "news",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "syslog",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "user",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "uucp",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local0",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local1",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local2",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local3",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local4",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local5",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        },
+                        {
+                            "facility-name": "local7",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "file": [
+                {
+                    "facility": [
+                        {
+                            "facility-name": "local6",
+                            "priority": {
+                                "match-above": "warning"
+                            }
+                        }
+                    ],
+                    "file-name": "messages",
+                    "rotate": 3,
+                    "size": "10000000"
+                }
+            ]
+        },
+        "srl_nokia-ssh:ssh-server": [
+            {
+                "admin-state": "enable",
+                "name": "mgmt",
+                "network-instance": "mgmt",
+                "use-credentialz": true
+            }
+        ],
+        "srl_nokia-system-banner:banner": {
+            "login-banner": "................................................................\n:                  Welcome to Nokia SR Linux!                  :\n:              Open Network OS for the NetOps era.             :\n:                                                              :\n:    This is a freely distributed official container image.    :\n:                      Use it - Share it                       :\n:                                                              :\n: Get started: https://learn.srlinux.dev                       :\n: Container:   https://go.srlinux.dev/container-image          :\n: Docs:        https://doc.srlinux.dev/24-3                    :\n: Rel. notes:  https://doc.srlinux.dev/rn24-3-2                :\n: YANG:        https://yang.srlinux.dev/v24.3.2                :\n: Discord:     https://go.srlinux.dev/discord                  :\n: Contact:     https://go.srlinux.dev/contact-sales            :\n................................................................\n"
+        },
+        "srl_nokia-system-snmp:snmp": {
+            "access-group": [
+                {
+                    "community-entry": [
+                        {
+                            "community": "$aes1$AWDRvJVXcQhhDW8=$uMaDeZ2aIUCov4PuZRIvnQ==",
+                            "name": "RO-Community"
+                        }
+                    ],
+                    "name": "SNMPv2-RO-Community",
+                    "security-level": "no-auth-no-priv"
+                }
+            ],
+            "network-instance": [
+                {
+                    "admin-state": "enable",
+                    "name": "mgmt"
+                }
+            ]
+        },
+        "srl_nokia-tls:tls": {
+            "server-profile": [
+                {
+                    "authenticate-client": false,
+                    "certificate": "-----BEGIN CERTIFICATE-----\nMIIDzzCCAregAwIBAgICBnowDQYJKoZIhvcNAQELBQAwUjELMAkGA1UEBhMCVVMx\nCTAHBgNVBAcTADEVMBMGA1UEChMMY29udGFpbmVybGFiMQkwBwYDVQQLEwAxFjAU\nBgNVBAMTDWwzZXZwbiBsYWIgQ0EwHhcNMjUwMjA1MTA0MDI3WhcNMjYwMjA1MTA0\nMDI3WjBUMQswCQYDVQQGEwJVUzEJMAcGA1UEBxMAMRUwEwYDVQQKEwxjb250YWlu\nZXJsYWIxCTAHBgNVBAsTADEYMBYGA1UEAxMPbGVhZjIubDNldnBuLmlvMIIBIjAN\nBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4grVJ6XRMNpVEogs1vyXJuRLhbJm\nBfTYgCxpIGaTUo1BcIOOJBhzhOnlrpz+FXtuk+wuOSsczGZWmJZmQhUZBL5ZhpZV\nFb1tdP7DIXAEhrXH6UARyeVPxv2YH7J1VG0pJ38melccM/s5AD+fY4yeUsb2o5HK\nc+vEVgNTDZ8J8w0XWltoKs6FgWm+laCGWOPRhTX/LHQRdYqaZAcJkIxtgQnJmK2n\n3yO1JPa+AJXvT7qDWZNhtHmjXWk3uGwi9ZXjTibLxBs1DdHH4Z8S0GkLNDOeWVMq\nbCQgg/+S67XLNFMxgUJ+bRykGZTKzeGKy5u39V3FYDhuRa3yPlVfk58L6wIDAQAB\no4GsMIGpMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYB\nBQUHAwEwDgYDVR0OBAcEBQECAwQGMB8GA1UdIwQYMBaAFCKzcWeMGEjJhM/1UM5I\nKgHptLZxMEcGA1UdEQRAMD6CBWxlYWYyggxsM2V2cG4tbGVhZjKCD2xlYWYyLmwz\nZXZwbi5pb4cErBQUA4cQP/8BcgAgACAAAAAAAAAAAzANBgkqhkiG9w0BAQsFAAOC\nAQEAd/TJrPMVU/ISn2fn/dx6IcfSZjjIyfc2woJgTTFF0t2mHoKcfo6YhhrnvuIU\nbsY0aw3cP1CSdYZ6j8wpNM7fu96eoPgw+E7jWJ2CfrZ2BYQhUgMpOv1fbhiy5riZ\ns7YPJBdm99yC2yFpiuElOOI8YZ3eMpa2CnMrEcd6hc/eYHKfBUi+lq2mjdE6JTam\nWnXECz6fXJU81dSfxrsL2rjDLFS3Z3w5BEzetpirecq2Ff5z/ebgptM7BjOVQKsm\nQ/k8VWf2CdTlE9csongQV0GZcHLUBQ7yDYtnBUFITj7tqLemlBVRdoN1qMRDPgjU\nSlkGRIdRQ0xGZeClLtQqqj4nJA==\n-----END CERTIFICATE-----\n",
+                    "key": "$aes1$ATBFGh9IxexUyW8=$z683EaZmeeD9GBswYMtu9m8gxxTNXZEgnFfxqe9aQcNxVUI2HJuul9XGADTwkSiIuIQUwNLmJpD0zB7zmRQCbIexVosUxI+EZPAp7faN67HQjIY+ZuT9KQIAnUYHIodeEszaYnW9JKqQItW/Lzdx+BgUTbTowSmf1StzmrvlBBUYs8TKAHNnyeVBJLr6re3/Cy4xaHwafjes42AiZvAz7bJKXNObfRFVob9DNG6ihEzACHIaw9CfNU7ocSFYXI6MqRqndJY/c0kjDlT8GBFt5Wae4HsYOIATHbm+ADfVLuOHw5kx5rGlwXVh0Eo73SwalZsH9yvLj/LL2ZQD4yWwYRtjbcO3gW6NcKO9iq5hii2SOtKwT73jEwFEJBen0kTOmaZJCDENwS+5LA61u09BC45bECO8jXdrgzj1d1YkJz4wwhafvOblK/KkPVis/nDVpY69McSUXEmdGax94SPxzl+fWcveQxioGV5TCvVUCd/tSa27d11+HFdk+NC8eYJ/Hl97qOHfsafNaKn0X78GZLvjWzndJzgs9cbU8ghCVCwHZlBeRp3gDdalFvLfsZIhAauk1U7UJT78zNmrsMXpO2+X+SxnIGSMS6mzMIKWYpbeJlThABbH/9syr/dJiarIEDLLy9QDa+49qq7U0lVJufiMQ0spf9U98ouC9MWqK6dTUmHHH94MdCD86bvDxBeHHoPAmKmSz9uxAWH9Eohi6ih6urNZMqBNMZAb2/q2X9KkzyV3HEVZrfQKpujWpcJEgM0WeGSGP4wcYVfPRv2Qkm5AvVyVzwgtyJxsIv14SehdXoHygR2FugVxerAGjQVbArHEf7wNoifIayA37IaucFka9x1doyb6Tm19AvV+oqpqHKAahpvndPpmGPa4A+kEqtuOXMmA+I7/RtIIr3zZfewh5i+TOTn4lGTUHxuCy4lknmavW4SXt1tZFm8z/eZdLNB8BPXnptm3NLsLa2OGgIHqLhm7QmJOgQPuap7h5MCv3G/ZIPTkJku3I8hiAHwj02X6MFeBCfC4Y8/h4LNhTRBMsjoiv7rzAyTSyQlvB4YjbiKVWNmpuPD5YD2FwAp1JtrSfCIx/xfM7+vaxkMMtC0DSkERBxnjmLHEUUuFoFCCBq8IALNyGr6reXtH2XRbDBJEpUzlwh0zMpgwlZSYPRPzTXWHTr3bfA1LxeuvuN6F6+LM4ZGKcv6dztbwPQeNwfumAsNmoluml/KMFboYNKGEQzIO7wGaJv22bmKlcaL67FaQ0sPHsA9EMdwZpPz92NY6ULxjnsh+teIXAUV5wy+IyCzK5MYR+dAlK5ATVmd2VSnt6+zifPYE+acx8o8rCtQR8K7r9jSTMHJf3am3bKjl2HnlON3pww0MXkpSstehhMuO71S8ognZVntkgJRbvFdIeyOerU8/PE3nYc4/XRxJdBrPLEQfj+QVr3UxbzZdYYeDosPl3bBMeFtSMV2QbOQODpvJgnaORJ9Is8RyFoN2XFQ4h//kwT9m1zr5uymDWnR8FlQows/pmnJx4l1dLLhz6GxijzwvPMT4cxatGVAXVdgzqJN0qLQLA60V2NN11eA9f7LVurwgSAzDHM2OOTBQkrBtjFRvPu2tnepYy27fs5O9N9WJQjgFVb37h99jnfo0V/t87LunFROX/O9pyIe3xCtqUVbHLLM2KZHt5MoWIRwsLZZCrGouz00FDD+LNo4d+w75tKMQhl4QyjZ5/hoS8VCVbJl9R9TCUfu8+HiBCiRHLjDgpZgYk703y8yIW5C7UOSI0wUNGs4mJbNAeIe+z2GoNv1z4rFDlQcw4J34uhHDw/i5X/rNOO+T+URb3lEK0FrOWryiZFE6TEyZirKoY/F5Cz+hRbv/csvB0dgectd78bMEyoQYZxdqd6IRNCT2paLsEQ4dNG87BKTvcI2Y280nVkROmuS1uwwRCPA0rJHorrzIQsr6FaBuZk40/TUeOilwV2SOl7bHCjanlbxVQjdg2vvaBpfzD9FKfVGhhQ+Oofac0I829iIiuRZjIUukomGJdk0ASoSAnNf94N1FHVZTya/mwjKqcy5H0YELrrE/0Dx/xbvkb/jOVkocC3ejrSoXlrrNo96L8qA8PT/zxSxHey58wSe10A+aqhn/8/0C7ajiDBc15T70U+jsIS+5BPvz0kQ/+FZ8tGvS2NZuzOYcLHTr8ckDTN+s1jrjzdJ851KJbNY8SLDOAZ8E02gqzwJM6qHYTnC5/toL",
+                    "name": "clab-profile"
+                }
+            ]
+        }
+    },
+    "srl_nokia-tunnel-interfaces:tunnel-interface": [
+        {
+            "name": "vxlan1",
+            "vxlan-interface": [
+                {
+                    "index": 100200,
+                    "ingress": {
+                        "vni": 100200
+                    },
+                    "type": "srl_nokia-interfaces:routed"
+                }
+            ]
+        }
+    ]
+}
